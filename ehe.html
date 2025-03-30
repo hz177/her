@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SELAMAT HARI RAYA AIDILFITRI YAYANG💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+        
+        body { text-align: center; font-family: Arial, sans-serif; background-color: #FFF2A8; color: black; margin: 0; padding: 0; overflow: hidden; }
+        .hidden { display: none; }
+        .container { display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; position: relative; }
+        img { width: 80%; max-width: 400px; border-radius: 10px; cursor: pointer; }
+        .text { font-size: 28px; font-weight: bold; text-shadow: 2px 2px 0px #FF9090; margin-top: 20px; }
+        .love-envelope { 
+            position: absolute; 
+            bottom: 20px; 
+            right: 20px; 
+            font-size: 70px; 
+            cursor: pointer; 
+            transition: transform 0.2s; 
+            color: #FF69B4;
+        }
+        .love-envelope:hover { transform: scale(1.1); }
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+            border: 5px solid #FF1493;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            font-family: 'Chewy', cursive;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+        .falling { 
+            position: absolute; 
+            top: -50px; 
+            font-size: 30px; 
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+        .firework {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background: transparent;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="page1" class="container">
+        <img src="https://raw.githubusercontent.com/hz177/her/main/image.jpg" 
+             alt="Tap to Next" onclick="showPage(2)">
+        <div class="text">TAP IMAGE FOR NEXT</div>
+    </div>
+
+    <div id="page2" class="container hidden">
+        <iframe width="560" height="315" 
+                src="https://www.youtube.com/embed/hkwMQhMHUKM" 
+                frameborder="0" allowfullscreen>
+        </iframe>
+        <span class="love-envelope" onclick="showPage(3)">💌</span>
+    </div>
+
+    <div id="page3" class="container hidden">
+        <div id="messageBox" class="message-box">
+            <p id="typing-text"></p>
+        </div>
+    </div>
+
+    <script>
+        function showPage(page) {
+            history.pushState({ page: page }, '', '#page' + page);
+            updatePage(page);
+        }
+
+        function updatePage(page) {
+            document.querySelectorAll('.container').forEach(div => div.style.display = 'none');
+            document.getElementById('page' + page).style.display = 'flex';
+            if (page === 3) showMessage();
+        }
+
+        function showMessage() {
+            const message = "Assalamualaikum yayang, Selamat Hari Raya Maaf Zahir Dan Batin Yayang💖. First of all, saya nak minta maaf atas segala kesilapan dan kesalahan selama kita berkenalan sehingga kita bercinta sekarang.. Tahun ni raya kedua kita ehee, lurvee la yayangggg!!! thanks so muchh sebab bertahan dengan diri ini💖 macam mana pun, sayang harap sangat2 awakk enjoy juga hari raya nii wokayyy💖 more to it, i really nak kawin dengan awakkk dhhhh but yea rezeki blm lagii but cemana pun i will do my best for it wokayyy💖💖💖💖 LOVEE YOUU SOOO MUCH YAYANGG!!!💖 once again, Selamat Hari Raya Maaf Zahir Dan Batin<3<3<3 ";
+            document.getElementById('messageBox').style.display = 'block';
+            let i = 0;
+            function typeEffect() {
+                if (i < message.length) {
+                    document.getElementById('typing-text').innerHTML += message.charAt(i);
+                    i++;
+                    setTimeout(typeEffect, 50);
+                } else {
+                    startCelebration();
+                }
+            }
+            typeEffect();
+        }
+        
+        function startCelebration() {
+            setInterval(() => {
+                let loveColors = ['❤️', '💙', '💚', '💛', '💜', '🧡'];
+                let element = document.createElement('div');
+                element.className = 'falling';
+                element.innerHTML = loveColors[Math.floor(Math.random() * loveColors.length)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                document.body.appendChild(element);
+                setTimeout(() => element.remove(), 5000);
+            }, 500);
+            setInterval(createFirework, 800);
+        }
+        
+        function createFirework() {
+            let fireworkContainer = document.createElement('div');
+            fireworkContainer.style.position = 'fixed';
+            fireworkContainer.style.left = Math.random() * 100 + 'vw';
+            fireworkContainer.style.top = Math.random() * 100 + 'vh';
+            document.body.appendChild(fireworkContainer);
+            for (let i = 0; i < 12; i++) {
+                let particle = document.createElement('div');
+                particle.className = 'firework';
+                particle.style.width = '5px';
+                particle.style.height = '5px';
+                particle.style.background = ['red', 'blue', 'yellow', 'pink', 'purple', 'green'][Math.floor(Math.random() * 6)];
+                particle.style.position = 'absolute';
+                let angle = (i / 12) * (2 * Math.PI);
+                let x = Math.cos(angle) * 30;
+                let y = Math.sin(angle) * 30;
+                particle.style.transform = `translate(${x}px, ${y}px)`;
+                particle.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+                fireworkContainer.appendChild(particle);
+                setTimeout(() => {
+                    particle.style.transform = `translate(${x * 3}px, ${y * 3}px)`;
+                    particle.style.opacity = '0';
+                }, 100);
+            }
+            setTimeout(() => fireworkContainer.remove(), 1000);
+        }
+
+        window.onpopstate = function(event) {
+            updatePage(event.state ? event.state.page : 1);
+        };
+    </script>
+</body>
+</html>
